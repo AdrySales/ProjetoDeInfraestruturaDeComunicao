@@ -18,7 +18,7 @@ print("O servidor UDP esta pronto para receber")
 #imprime uma mensagem e abre um arquivo chamado "recebido.txt" em modo de escrita binaria ("wb") para armazenar os dados recebidos.
 data,addr = UDPServerSocket.recvfrom(bufferSize)
 print ("Received File:",data.strip())
-file = open("recebido.txt",'wb')
+file = open("recebido.jpeg",'wb')
 
 #O metodo recvfrom() e um metodo da classe de socket em Python, e e utilizado para receber dados de um socket. 
 #Ele e particularmente util quando se trabalha com sockets UDP, como e o caso do codigo que voce forneceu.

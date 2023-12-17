@@ -10,7 +10,7 @@ bufferSize = 1024
 UDPClientSocket = socket(AF_INET, SOCK_DGRAM)
 
 #Abre o arquivo "teste.txt" em modo de leitura binaria ("rb") e le a quantidade inicial de dados definida pelo bufferSize
-file = open("teste.txt","rb") 
+file = open("gato.jpeg","rb") 
 data = file.read(bufferSize)
 
 #Envia os dados lidos do arquivo em pacotes para o servidor usando o metodo sendto() do socket. O loop continua ate que todos os dados do arquivo tenham sido enviados.
