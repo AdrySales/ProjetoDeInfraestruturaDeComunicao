@@ -2,47 +2,49 @@
 from socket import *
 
 # Tamanho do buffer usado para ler/enviar dados em pedacos.
-bufferSize = 1024
+tamanhoDoBuffer = 1024
 # Uma tupla que contem o endereco IP do cliente (localhost, "127.0.0.1") e o numero da porta (20001) em que o servidor esta vinculado para receber dados.
-clientAddressPort = ("127.0.0.1", 20001)
+servidorEnderecoPorta = ("127.0.0.1", 20001)
 
 # Cria um objeto de socket UDP utilizando a familia de enderecos IPv4 (AF_INET) e o tipo de socket datagrama (SOCK_DGRAM).
-# Vincula o socket ao endereco especificado em clientAddressPort.
-UDPServerSocket = socket(AF_INET, SOCK_DGRAM)
-UDPServerSocket.bind(clientAddressPort)
+# Vincula o socket ao endereco especificado em clienteEnderecoPorta.
+socketDoServidor = socket(AF_INET, SOCK_DGRAM)
+socketDoServidor.bind(servidorEnderecoPorta)
 
 # Após o vínculo, avisa que o servidor está pronto para receber dados.
-print("O servidor UDP esta pronto para receber")
+print("*******O servidor esta pronto para receber o arquivo*******")
 
 # Recebe os primeiros dados enviados pelo cliente usando o metodo recvfrom()
 # imprime uma mensagem e abre um arquivo chamado "recebido.txt" em modo de escrita binaria ("wb") para armazenar os dados recebidos.
-data,addr = UDPServerSocket.recvfrom(bufferSize)
-print ("Received File:",data.strip())
-file = open("recebido.jpeg",'wb')
+dado,addr = socketDoServidor.recvfrom(tamanhoDoBuffer)
+print ("Arquivo:",dado.strip())
+arquivo = open("recebido.jpeg",'wb')
 
 try:
-    while data: # É realizado um loop para receber os dados do arquivo e salvá-los localmente. O loop continua ate que ocorra um timeout
-        file.write(data) # Grava os dados recebidos no arquivo "recebido.txt".Cada iteracao do loop escreve um pedaco dos dados no arquivo. 
-        UDPServerSocket.settimeout(2) # Define um timeout de 2 segundos para o socket. Isso significa que, se nao houver recebimento de dados dentro de 2 segundos, o socket lancara uma excecao do tipo timeout.
-        data,addr = UDPServerSocket.recvfrom(bufferSize) # Recebe dados do cliente usando o metodo recvfrom(). data contem os dados recebidos, e addr contem o endereco do cliente.
+    while dado: # É realizado um loop para receber os dados do arquivo e salvá-los localmente. O loop continua ate que ocorra um timeout
+        arquivo.write(dado) # Grava os dados recebidos no arquivo "recebido.txt".Cada iteracao do loop escreve um pedaco dos dados no arquivo. 
+        socketDoServidor.settimeout(2) # Define um timeout de 2 segundos para o socket. Isso significa que, se nao houver recebimento de dados dentro de 2 segundos, o socket lancara uma excecao do tipo timeout.
+        dado,addr = socketDoServidor.recvfrom(tamanhoDoBuffer) # Recebe dados do cliente usando o metodo recvfrom(). dado contem os dados recebidos, e addr contem o endereco do cliente.
 except timeout:
-    file.close()
-    print ("File Downloaded")
+    arquivo.close()
+    print ("O download terminou!!!")
 
 # Abre o arquivo "recebido.txt" em modo de leitura binaria ("rb") e le a quantidade inicial de dados definida pelo bufferSize.
-file = open("recebido.txt","rb") 
-data = file.read(bufferSize)
+arquivo = open("recebido.jpeg","rb") 
+dado = arquivo.read(tamanhoDoBuffer)
 
 # Envia os dados lidos do arquivo de volta para o cliente em pacotes usando o metodo sendto() do socket.
 # O loop continua ate que todos os dados do arquivo tenham sido enviados
-while data:
-    if(UDPServerSocket.sendto(data, addr)):
-        print ("sending ...")
-        data = file.read(bufferSize)
+while dado:
+    if(socketDoServidor.sendto(dado, addr)):
+        dado = arquivo.read(tamanhoDoBuffer)
+
+print("Arquivo enviado!")
+
 
 # Encerra o socket e o arquivo 
-UDPServerSocket.close()
-file.close()
+socketDoServidor.close()
+arquivo.close()
 
 
 
