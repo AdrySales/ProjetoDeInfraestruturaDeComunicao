@@ -18,7 +18,7 @@ print("O servidor UDP esta pronto para receber")
 # imprime uma mensagem e abre um arquivo chamado "recebido.txt" em modo de escrita binaria ("wb") para armazenar os dados recebidos.
 data,addr = UDPServerSocket.recvfrom(bufferSize)
 print ("Received File:",data.strip())
-file = open("recebido.txt",'wb')
+file = open("recebido.jpeg",'wb')
 
 try:
     while data: # É realizado um loop para receber os dados do arquivo e salvá-los localmente. O loop continua ate que ocorra um timeout

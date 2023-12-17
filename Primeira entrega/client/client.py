@@ -9,8 +9,8 @@ bufferSize = 1024
 # Cria um objeto de socket UDP utilizando a familia de enderecos IPv4 (AF_INET) e o tipo de socket datagrama (SOCK_DGRAM)
 UDPClientSocket = socket(AF_INET, SOCK_DGRAM)
 
-# Abre o arquivo "teste.txt" em modo de leitura binaria ("rb") e le a quantidade inicial de dados definida pelo bufferSize
-file = open("teste.txt","rb") 
+#Abre o arquivo "teste.txt" em modo de leitura binaria ("rb") e le a quantidade inicial de dados definida pelo bufferSize
+file = open("gato.jpeg","rb") 
 data = file.read(bufferSize)
 
 # Envia os dados lidos do arquivo em pacotes para o servidor usando o metodo sendto() do socket. O loop continua ate que todos os dados do arquivo tenham sido enviados.
