@@ -9,7 +9,7 @@ tamanhoDoBuffer = 1024
 # Cria um objeto de socket UDP utilizando a familia de enderecos IPv4 (AF_INET) e o tipo de socket datagrama (SOCK_DGRAM)
 socketDoCliente = socket(AF_INET, SOCK_DGRAM)
 
-#Abre o arquivo "teste.txt" em modo de leitura binaria ("rb") e le a quantidade inicial de dados definida pelo tamanhoDoBuffer
+#Abre o arquivo "gato.jpeg" em modo de leitura binaria ("rb") e le a quantidade inicial de dados definida pelo tamanhoDoBuffer
 arquivo = open("gato.jpeg","rb") 
 dado = arquivo.read(tamanhoDoBuffer)
 
@@ -22,8 +22,8 @@ print("Arquivo enviado!")
 # Fecha o arquivo apos a conclusao do envio.
 arquivo.close()
 
-# Abre um novo arquivo chamado "recebido.txt" em modo de escrita binaria para armazenar os dados recebidos. Em seguida, recebe os primeiros dados do servidor.
-arquivo = open("recebido.jpeg", "wb")
+# Abre um novo arquivo chamado "arquivoRecebido.jpeg" em modo de escrita binaria para armazenar os dados recebidos. Em seguida, recebe os primeiros dados do servidor.
+arquivo = open("arquivoRecebido.jpeg", "wb")
 dado,addr = socketDoCliente.recvfrom(tamanhoDoBuffer)
 
 
@@ -39,4 +39,4 @@ try:
 except timeout:
     arquivo.close()
     socketDoCliente.close()
-    print ("Arquivo baixado!")
+    print ("Imagem baixada!")

@@ -15,22 +15,22 @@ socketDoServidor.bind(servidorEnderecoPorta)
 print("*******O servidor esta pronto para receber o arquivo*******")
 
 # Recebe os primeiros dados enviados pelo cliente usando o metodo recvfrom()
-# imprime uma mensagem e abre um arquivo chamado "recebido.txt" em modo de escrita binaria ("wb") para armazenar os dados recebidos.
+# imprime uma mensagem e abre um arquivo chamado "arquivoRecebido.txt" em modo de escrita binaria ("wb") para armazenar os dados recebidos.
 dado,addr = socketDoServidor.recvfrom(tamanhoDoBuffer)
 print ("Arquivo:",dado.strip())
-arquivo = open("recebido.jpeg",'wb')
+arquivo = open("arquivoRecebido.jpeg",'wb')
 
 try:
     while dado: # É realizado um loop para receber os dados do arquivo e salvá-los localmente. O loop continua ate que ocorra um timeout
-        arquivo.write(dado) # Grava os dados recebidos no arquivo "recebido.txt".Cada iteracao do loop escreve um pedaco dos dados no arquivo. 
+        arquivo.write(dado) # Grava os dados recebidos no arquivo "arquivoRecebido.txt".Cada iteracao do loop escreve um pedaco dos dados no arquivo. 
         socketDoServidor.settimeout(2) # Define um timeout de 2 segundos para o socket. Isso significa que, se nao houver recebimento de dados dentro de 2 segundos, o socket lancara uma excecao do tipo timeout.
         dado,addr = socketDoServidor.recvfrom(tamanhoDoBuffer) # Recebe dados do cliente usando o metodo recvfrom(). dado contem os dados recebidos, e addr contem o endereco do cliente.
 except timeout:
     arquivo.close()
     print ("O download terminou!!!")
 
-# Abre o arquivo "recebido.txt" em modo de leitura binaria ("rb") e le a quantidade inicial de dados definida pelo bufferSize.
-arquivo = open("recebido.jpeg","rb") 
+# Abre o arquivo "arquivoRecebido.txt" em modo de leitura binaria ("rb") e le a quantidade inicial de dados definida pelo bufferSize.
+arquivo = open("arquivoRecebido.jpeg","rb") 
 dado = arquivo.read(tamanhoDoBuffer)
 
 # Envia os dados lidos do arquivo de volta para o cliente em pacotes usando o metodo sendto() do socket.
@@ -39,7 +39,7 @@ while dado:
     if(socketDoServidor.sendto(dado, addr)):
         dado = arquivo.read(tamanhoDoBuffer)
 
-print("Arquivo enviado!")
+print("Arquivo baixado!")
 
 
 # Encerra o socket e o arquivo 
