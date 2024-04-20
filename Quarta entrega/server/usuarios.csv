@@ -1,0 +1,9 @@
+id,nome,endereco,ativo
+1,lipe,127.0.0.1:60790,True
+2,marcos,127.0.0.1:62222,True
+3,Yasmim,127.0.0.1:52277,True
+5,julia,127.0.0.1:57034,True
+6,mili,127.0.0.1:49870,True
+7,july,127.0.0.1:50263,False
+8,bubu,127.0.0.1:61581,False
+9,deni,127.0.0.1:53016,True
